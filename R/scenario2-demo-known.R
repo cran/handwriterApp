@@ -18,7 +18,10 @@
 demoKnownSidebarUI <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
-    shiny::fluidRow(shiny::column(width=12, shiny::actionButton(ns("demo_known_estimate"), "Estimate Writer Profiles"))),
+    shiny::fluidRow(shiny::column(width=12, 
+                                  shiny::actionButton(class = "btn-sidebar",
+                                                      ns("demo_known_estimate"), 
+                                                      "Estimate Writer Profiles"))),
     shiny::br()
   )
 }
@@ -26,7 +29,7 @@ demoKnownSidebarUI <- function(id) {
 demoKnownBodyUI <- function(id){
   ns <- shiny::NS(id)
   shiny::tagList(
-    currentImageUI(ns("demo_known"))
+    selectImageUI(ns("demo_known"))
   )
 }
 
@@ -42,7 +45,7 @@ demoKnownServer <- function(id, global) {
         create_dir(file.path(global$main_dir, "data"))
         create_dir(file.path(global$main_dir, "data", "model_docs"))
         create_dir(file.path(global$main_dir, "data", "questioned_docs"))
-        saveRDS(templateK8, file.path(global$main_dir, "data", "template.rds"))
+        saveRDS(templateK40, file.path(global$main_dir, "data", "template.rds"))
         
         # known writing samples in tests folder
         known_paths <- list.files(system.file(file.path("extdata", "template", "data", "model_docs"), package = "handwriterApp"), full.names = TRUE)
@@ -68,7 +71,7 @@ demoKnownServer <- function(id, global) {
                                               doc_indices = c(7, 18))
       })
       
-      currentImageServer("demo_known", global, "model")
+      selectImageServer("demo_known", global, "model")
     }
   )
 }

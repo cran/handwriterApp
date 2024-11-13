@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <https://www.gnu.org/licenses/>.
 
+
 caseKnownSidebarUI <- function(id) {
   ns <- shiny::NS(id)
   shiny::tagList(
@@ -31,7 +32,7 @@ caseKnownSidebarUI <- function(id) {
 caseKnownBodyUI <- function(id){
   ns <- shiny::NS(id)
   shiny::tagList(
-    currentImageUI(ns("known"))
+    selectImageUI(ns("known"))
   )
 }
 
@@ -66,7 +67,7 @@ caseKnownServer <- function(id, global) {
                                                               input$known_doc_end_char))
       })
       
-      currentImageServer("known", global, "model")
+      selectImageServer("known", global, "model")
     }
   )
 }
